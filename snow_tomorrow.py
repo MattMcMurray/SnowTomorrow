@@ -9,6 +9,9 @@ def get_forecast(event, context):
 
   if API_KEY is None:
       raise ValueError('OPEN_WEATHER_MAP_API_KEY env var is not present')
+      
+  if IFTTT_URL is None:
+      raise ValueError('IFTTT_URL env var is not present')
 
   LOCATION='Winnipeg,CA'
   REQUEST_URL='http://api.openweathermap.org/data/2.5/forecast?q={}&appid={}'.format(LOCATION, API_KEY)
