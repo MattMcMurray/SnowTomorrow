@@ -5,6 +5,7 @@ import requests
 
 def get_forecast(event, context):
   API_KEY=os.getenv('OPEN_WEATHER_MAP_API_KEY', None)
+  IFTTT_URL=os.getenv('IFTTT_URL', None)
 
   if API_KEY is None:
       raise ValueError('OPEN_WEATHER_MAP_API_KEY env var is not present')
@@ -30,7 +31,8 @@ def get_forecast(event, context):
   # use a set to remove duplicate entries
   relevant_forecasts = list(set(relevant_forecasts))
 
-  return {'conditions': relevant_forecasts}
+  if len(relevant_forecasts) > 0:
+    requests.post(IFTTT_URL, {'value1': json.dumps(relevant_forecasts)})
 
 if __name__ == '__main__':
-  print(get_forecast())
+  get_forecast(None, None)
