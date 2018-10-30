@@ -3,7 +3,7 @@ import json
 import os
 import requests
 
-def get_forecast():
+def get_forecast(event, context):
   API_KEY=os.getenv('OPEN_WEATHER_MAP_API_KEY', None)
 
   if API_KEY is None:
